@@ -11,14 +11,18 @@ public class Beat {
     private Long id;
     private String title;
 
+
     public Beat() {}
-    public Beat(Long id, String title) {
-        this.id = id;
+    public Beat(String title) {
         this.title = title;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
