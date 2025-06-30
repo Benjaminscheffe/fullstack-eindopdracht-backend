@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeatMapper {
     public Beat toEntity(BeatRequestDto beatRequestDto) {
+
         return new Beat(beatRequestDto.title);
     }
 

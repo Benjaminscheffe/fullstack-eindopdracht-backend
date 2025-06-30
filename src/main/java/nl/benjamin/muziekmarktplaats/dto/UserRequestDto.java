@@ -7,18 +7,23 @@ public class UserRequestDto {
 
     @NotBlank
     @Size(min=3, max=30)
-    public String title;
+    public String email;
 
     @NotBlank
     @Size(min=8, max=32)
     public String password;
 
-    public String getTitle() {
-        return title;
+    public UserRequestDto(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
