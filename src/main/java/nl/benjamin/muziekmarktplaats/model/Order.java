@@ -15,8 +15,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(Long id, Date orderDate) {
-        this.id = id;
+    public Order(Date orderDate) {
         orderNumber = orderNumber++;
         this.orderDate = orderDate;
     }
@@ -25,7 +24,7 @@ public class Order {
         return id;
     }
 
-    public static int getOrderNumber() {
+    public int getOrderNumber() {
         return orderNumber;
     }
 
