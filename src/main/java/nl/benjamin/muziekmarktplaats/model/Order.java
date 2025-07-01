@@ -7,16 +7,17 @@ import java.util.Date;
 @Table(name = "orders")
 public class Order {
 
+    private static int counter = 2501;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private static int orderNumber = 2501;
+    private int orderNumber;
     private Date orderDate;
 
     public Order() {}
 
     public Order(Date orderDate) {
-        orderNumber = orderNumber++;
+        this.orderNumber = counter++;
         this.orderDate = orderDate;
     }
 
