@@ -14,8 +14,7 @@ public class Review {
 
     public Review(){}
 
-    public Review(Long id, int score, String comment) {
-        this.id = id;
+    public Review(int score, String comment) {
         this.score = score;
         this.comment = comment;
     }
