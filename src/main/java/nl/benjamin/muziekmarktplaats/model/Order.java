@@ -10,12 +10,14 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private static int orderNumber = 2501;
     private Date orderDate;
 
     public Order() {}
 
     public Order(Long id, Date orderDate) {
         this.id = id;
+        orderNumber = orderNumber++;
         this.orderDate = orderDate;
     }
 
@@ -23,8 +25,15 @@ public class Order {
         return id;
     }
 
+    public static int getOrderNumber() {
+        return orderNumber;
+    }
+
     public Date getOrderDate() {
         return orderDate;
     }
 
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 }
