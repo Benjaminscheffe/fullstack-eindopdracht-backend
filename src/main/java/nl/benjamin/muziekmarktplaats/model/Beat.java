@@ -3,6 +3,7 @@ package nl.benjamin.muziekmarktplaats.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.jar.Attributes;
 
 @Entity
 @Table(name = "beats")
@@ -22,8 +23,11 @@ public class Beat {
     List<Order> orders;
 
     @OneToMany(mappedBy = "beat")
-    List<Review>  reviews;
+    List<Review> reviews;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
 
     public Image getImage() {
         return image;
@@ -70,5 +74,13 @@ public class Beat {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

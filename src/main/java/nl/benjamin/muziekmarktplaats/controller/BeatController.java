@@ -57,8 +57,13 @@ public class BeatController {
     }
 
     @PutMapping("/{id}/image/{imageId}")
-    public void assignImageToBeat(@PathVariable("id") Long id, @PathVariable Long imageId) {
+    public void assignImageToBeat(@PathVariable("id") Long id, @PathVariable("imageId") Long imageId) {
         service.assignImageToBeat(id, imageId);
+    }
+
+    @PutMapping("/{id}/user/{userId}")
+    public void assignUserToBeat(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
+        service.assignUserToBeat(id, userId);
     }
 
 

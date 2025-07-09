@@ -6,8 +6,10 @@ import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.BeatMapper;
 import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.Image;
+import nl.benjamin.muziekmarktplaats.model.User;
 import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.ImageRepository;
+import nl.benjamin.muziekmarktplaats.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +21,13 @@ public class BeatService {
 
     private final BeatRepository repos;
     private final ImageRepository imageRepository;
+    private final UserRepository userRepository;
     private final BeatMapper mapper;
 
-    public BeatService(BeatRepository repos, ImageRepository imageRepository, BeatMapper mapper) {
+    public BeatService(BeatRepository repos, ImageRepository imageRepository, UserRepository userRepository, BeatMapper mapper) {
         this.repos = repos;
         this.imageRepository = imageRepository;
+        this.userRepository = userRepository;
         this.mapper = mapper;
     }
 
@@ -88,6 +92,20 @@ public class BeatService {
             repos.save(television);
         } else {
             throw new RecordNotFoundException();
+        }
+    }
+
+    public void assignUserToBeat(Long id, Long userId) {
+        Optional<Beat> optionalBeat = repos.findById(id);
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if(optionalBeat.isPresent() && optionalUser.isPresent()) {
+            Beat beat = optionalBeat.get();
+            User user = optionalUser.get();
+
+            beat.setUser(user);
+
+            repos.save(beat);
         }
     }
 }

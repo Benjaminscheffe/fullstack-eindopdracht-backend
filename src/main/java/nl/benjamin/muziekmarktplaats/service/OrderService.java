@@ -6,8 +6,10 @@ import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.OrderMapper;
 import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.Order;
+import nl.benjamin.muziekmarktplaats.model.User;
 import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.OrderRepository;
+import nl.benjamin.muziekmarktplaats.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +21,13 @@ public class OrderService {
 
     private final OrderRepository repos;
     private final BeatRepository beatRepository;
+    private final UserRepository userRepository;
     private final OrderMapper mapper;
 
-    public OrderService(OrderRepository repos, BeatRepository beatRepository, OrderMapper mapper) {
+    public OrderService(OrderRepository repos, BeatRepository beatRepository, UserRepository userRepository, OrderMapper mapper) {
         this.repos = repos;
         this.beatRepository = beatRepository;
+        this.userRepository = userRepository;
         this.mapper = mapper;
     }
 
@@ -87,6 +91,20 @@ public class OrderService {
             repos.save(order);
         } else {
             throw new RecordNotFoundException("No Order");
+        }
+    }
+
+    public void assignUserToOrder(Long id, Long userId) {
+        Optional<Order> optionalOrder = repos.findById(id);
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if(optionalOrder.isPresent() && optionalUser.isPresent()) {
+            Order order = optionalOrder.get();
+            User user = optionalUser.get();
+
+            order.setUser(user);
+
+            repos.save(order);
         }
     }
 }

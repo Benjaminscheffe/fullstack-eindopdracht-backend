@@ -18,13 +18,9 @@ public class Order {
     @JoinColumn(name = "beat_id")
     Beat beat;
 
-    public Beat getBeat() {
-        return beat;
-    }
-
-    public void setBeat(Beat beat) {
-        this.beat = beat;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
 
     public Order() {}
 
@@ -47,5 +43,21 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public Beat getBeat() {
+        return beat;
+    }
+
+    public void setBeat(Beat beat) {
+        this.beat = beat;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

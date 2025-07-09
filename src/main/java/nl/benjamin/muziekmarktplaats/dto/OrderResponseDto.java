@@ -7,4 +7,5 @@ public class OrderResponseDto {
     public int orderNumber;
     public Date orderDate;
     public Long beatId;
+    public Long userId;
 }

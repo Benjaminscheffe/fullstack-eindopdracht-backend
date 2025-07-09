@@ -57,5 +57,10 @@ public class OrderController {
         service.assignBeatToOrder(id, beatId);
     }
 
+    @PutMapping("/{id}/user/{userId}")
+    public void assignUserToOrder(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
+        service.assignUserToOrder(id, userId);
+    }
+
 
 }

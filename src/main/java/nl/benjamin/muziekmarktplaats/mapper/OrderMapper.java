@@ -18,6 +18,7 @@ public class OrderMapper {
         orderDto.orderDate = order.getOrderDate();
         orderDto.orderNumber = order.getOrderNumber();
         orderDto.beatId = order.getBeat().getId();
+        orderDto.userId = order.getUser().getId();
 
         return orderDto;
     }
