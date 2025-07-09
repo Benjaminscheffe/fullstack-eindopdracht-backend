@@ -9,11 +9,22 @@ public class BeatRequestDto {
     @Size(min=3, max=30)
     public String title;
 
+    @NotBlank
+    public int bpm;
+
+    @NotBlank
+    public int price;
+
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public int getBpm() {
+        return bpm;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
 }

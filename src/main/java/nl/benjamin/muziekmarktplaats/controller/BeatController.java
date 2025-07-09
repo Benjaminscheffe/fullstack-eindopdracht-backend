@@ -56,5 +56,10 @@ public class BeatController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @PutMapping("/{id}/image/{imageId}")
+    public void assignImageToBeat(@PathVariable("id") Long id, @PathVariable Long imageId) {
+        service.assignImageToBeat(id, imageId);
+    }
+
 
 }

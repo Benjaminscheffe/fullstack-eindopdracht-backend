@@ -4,7 +4,9 @@ import nl.benjamin.muziekmarktplaats.dto.OrderRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.OrderResponseDto;
 import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.OrderMapper;
+import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.Order;
+import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository repos;
+    private final BeatRepository beatRepository;
     private final OrderMapper mapper;
 
-    public OrderService(OrderRepository repos, OrderMapper mapper) {
+    public OrderService(OrderRepository repos, BeatRepository beatRepository, OrderMapper mapper) {
         this.repos = repos;
+        this.beatRepository = beatRepository;
         this.mapper = mapper;
     }
 
@@ -67,6 +71,22 @@ public class OrderService {
             return mapper.toResponseDto(returnOrder);
         } else {
             throw new RecordNotFoundException("No order with id " + id);
+        }
+    }
+
+    public void assignBeatToOrder(Long id, Long beatId) {
+        Optional<Order> optionalOrder = repos.findById(id);
+        Optional<Beat> optionalBeat = beatRepository.findById(beatId);
+
+        if(optionalOrder.isPresent() && optionalBeat.isPresent()) {
+            Order order = optionalOrder.get();
+            Beat beat = optionalBeat.get();
+
+            order.setBeat(beat);
+
+            repos.save(order);
+        } else {
+            throw new RecordNotFoundException("No beats? or no Order?");
         }
     }
 }

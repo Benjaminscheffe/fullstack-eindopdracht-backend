@@ -15,9 +15,11 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService service;
+    private final OrderService orderService;
 
-    public OrderController(OrderService service) {
+    public OrderController(OrderService service, OrderService orderService) {
         this.service = service;
+        this.orderService = orderService;
     }
 
     @PostMapping
@@ -50,6 +52,11 @@ public class OrderController {
         OrderResponseDto dto = service.updateOrder(id, orderRequestDto);
 
         return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping("/{id}/beat/{beatId}")
+    public void assignBeatToOrder(@PathVariable("id") Long id, @PathVariable("beatId") Long beatId) {
+        orderService.assignBeatToOrder(id, beatId);
     }
 
 
