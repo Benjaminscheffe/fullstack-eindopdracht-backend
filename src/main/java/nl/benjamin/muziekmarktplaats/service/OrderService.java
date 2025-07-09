@@ -86,7 +86,7 @@ public class OrderService {
 
             repos.save(order);
         } else {
-            throw new RecordNotFoundException("No beats? or no Order?");
+            throw new RecordNotFoundException("No Order");
         }
     }
 }

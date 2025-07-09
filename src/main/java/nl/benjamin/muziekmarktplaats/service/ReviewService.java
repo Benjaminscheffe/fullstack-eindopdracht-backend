@@ -4,7 +4,9 @@ import nl.benjamin.muziekmarktplaats.dto.ReviewRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.ReviewResponseDto;
 import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.ReviewMapper;
+import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.Review;
+import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class ReviewService {
 
     private final ReviewRepository repos;
+    private final BeatRepository beatRepository;
     private final ReviewMapper mapper;
 
-    public ReviewService(ReviewRepository repos, ReviewMapper mapper) {
+    public ReviewService(ReviewRepository repos, BeatRepository beatRepository, ReviewMapper mapper) {
         this.repos = repos;
+        this.beatRepository = beatRepository;
         this.mapper = mapper;
     }
 
@@ -68,6 +72,22 @@ public class ReviewService {
             return mapper.toResponseDto(returnReview);
         } else {
             throw new RecordNotFoundException("No review with id " + id);
+        }
+    }
+
+    public void assignBeatToReview(Long id, Long beatId) {
+        Optional<Review> optionalReview = repos.findById(id);
+        Optional<Beat> optionalBeat = beatRepository.findById(beatId);
+
+        if(optionalReview.isPresent() && optionalBeat.isPresent()) {
+            Review review = optionalReview.get();
+            Beat beat = optionalBeat.get();
+
+            review.setBeat(beat);
+
+            repos.save(review);
+        } else {
+            throw new RecordNotFoundException("No review");
         }
     }
 }

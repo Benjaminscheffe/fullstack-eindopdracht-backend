@@ -4,4 +4,5 @@ public class ReviewResponseDto {
     public Long id;
     public int score;
     public String comment;
+    public Long beatId;
 }

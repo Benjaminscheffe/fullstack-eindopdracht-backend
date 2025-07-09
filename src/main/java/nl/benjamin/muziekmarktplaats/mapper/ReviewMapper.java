@@ -17,6 +17,7 @@ public class ReviewMapper {
         reviewDto.id = review.getId();
         reviewDto.score = review.getScore();
         reviewDto.comment = review.getComment();
+        reviewDto.beatId = review.getBeat().getId();
 
         return reviewDto;
     }

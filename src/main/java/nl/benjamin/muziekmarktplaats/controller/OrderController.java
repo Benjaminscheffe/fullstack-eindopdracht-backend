@@ -15,11 +15,9 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService service;
-    private final OrderService orderService;
 
-    public OrderController(OrderService service, OrderService orderService) {
+    public OrderController(OrderService service) {
         this.service = service;
-        this.orderService = orderService;
     }
 
     @PostMapping
@@ -56,7 +54,7 @@ public class OrderController {
 
     @PutMapping("/{id}/beat/{beatId}")
     public void assignBeatToOrder(@PathVariable("id") Long id, @PathVariable("beatId") Long beatId) {
-        orderService.assignBeatToOrder(id, beatId);
+        service.assignBeatToOrder(id, beatId);
     }
 
 

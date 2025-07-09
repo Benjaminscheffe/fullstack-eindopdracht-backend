@@ -21,6 +21,9 @@ public class Beat {
     @OneToMany(mappedBy = "beat")
     List<Order> orders;
 
+    @OneToMany(mappedBy = "beat")
+    List<Review>  reviews;
+
 
     public Image getImage() {
         return image;
