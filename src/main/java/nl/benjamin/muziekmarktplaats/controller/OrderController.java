@@ -52,5 +52,15 @@ public class OrderController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @PutMapping("/{id}/beat/{beatId}")
+    public void assignBeatToOrder(@PathVariable("id") Long id, @PathVariable("beatId") Long beatId) {
+        service.assignBeatToOrder(id, beatId);
+    }
+
+    @PutMapping("/{id}/user/{userId}")
+    public void assignUserToOrder(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
+        service.assignUserToOrder(id, userId);
+    }
+
 
 }

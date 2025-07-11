@@ -15,6 +15,13 @@ public class Image {
     private Long id;
     private String name;
 
+    @OneToOne(mappedBy = "image")
+    Beat beat;
+
+    public Beat getBeat() {
+        return beat;
+    }
+
     public Image(String name) {
         this.name = name;
     }

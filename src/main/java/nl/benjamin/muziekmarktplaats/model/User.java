@@ -2,6 +2,8 @@ package nl.benjamin.muziekmarktplaats.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -11,6 +13,12 @@ public class User {
     private Long id;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
+
+    @OneToMany(mappedBy = "user")
+    List<Beat> beats;
 
     public User() {}
 
@@ -37,5 +45,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

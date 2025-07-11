@@ -17,6 +17,7 @@ public class UserMapper {
         userDto.id = user.getId();
         userDto.email = user.getEmail();
         userDto.password = user.getPassword();
+        userDto.orderList = user.getOrders();
 
         return userDto;
     }

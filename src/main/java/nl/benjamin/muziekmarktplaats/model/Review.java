@@ -12,6 +12,18 @@ public class Review {
     private int score;
     private String comment;
 
+    @ManyToOne
+    @JoinColumn(name = "beat_id")
+    Beat beat;
+
+    public void setBeat(Beat beat) {
+        this.beat = beat;
+    }
+
+    public Beat getBeat() {
+        return beat;
+    }
+
     public Review(){}
 
     public Review(int score, String comment) {

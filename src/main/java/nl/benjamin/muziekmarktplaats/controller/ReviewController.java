@@ -52,5 +52,11 @@ public class ReviewController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @PutMapping("/{id}/beat/{beatId}")
+    public void assignBeatToReview(@PathVariable("id") Long id, @PathVariable("beatId") Long beatId) {
+        service.assignBeatToReview(id, beatId);
+    }
+
+
 
 }

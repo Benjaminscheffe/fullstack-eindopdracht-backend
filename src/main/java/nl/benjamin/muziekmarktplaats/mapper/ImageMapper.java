@@ -15,6 +15,7 @@ public class ImageMapper {
         ImageResponseDto imageDto = new ImageResponseDto();
         imageDto.id = image.getId();
         imageDto.name = image.getName();
+        imageDto.beatId = image.getBeat().getId();
 
         return imageDto;
     }
