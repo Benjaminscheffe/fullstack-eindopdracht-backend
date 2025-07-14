@@ -6,6 +6,10 @@ import jakarta.validation.constraints.Size;
 public class UserRequestDto {
 
     @NotBlank
+    @Size(min=3, max=20)
+    public String username;
+
+    @NotBlank
     @Size(min=3, max=30)
     public String email;
 
@@ -16,6 +20,7 @@ public class UserRequestDto {
     public UserRequestDto(String email, String password) {
         this.email = email;
         this.password = password;
+
     }
 
     public String getEmail() {

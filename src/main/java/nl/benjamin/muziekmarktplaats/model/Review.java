@@ -16,6 +16,10 @@ public class Review {
     @JoinColumn(name = "beat_id")
     Beat beat;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
     public void setBeat(Beat beat) {
         this.beat = beat;
     }

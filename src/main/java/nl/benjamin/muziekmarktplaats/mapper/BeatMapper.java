@@ -18,6 +18,8 @@ public class BeatMapper {
         beatDto.bpm = beat.getBpm();
         beatDto.price = beat.getPrice();
         beatDto.imageId = beat.getImage().getId();
+        beatDto.orders = beat.getOrders();
+        beatDto.reviews = beat.getReviews();
         beatDto.userId = beat.getUser().getId();
 
         return beatDto;
