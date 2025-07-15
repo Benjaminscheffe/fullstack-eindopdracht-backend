@@ -76,6 +76,22 @@ public class Beat {
         this.price = price;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public User getUser() {
         return user;
     }
@@ -83,4 +99,6 @@ public class Beat {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

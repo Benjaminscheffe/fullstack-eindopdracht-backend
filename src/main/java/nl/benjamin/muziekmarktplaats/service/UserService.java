@@ -5,6 +5,7 @@ import nl.benjamin.muziekmarktplaats.dto.UserResponseDto;
 import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.UserMapper;
 import nl.benjamin.muziekmarktplaats.model.User;
+import nl.benjamin.muziekmarktplaats.repository.RoleRepository;
 import nl.benjamin.muziekmarktplaats.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +17,19 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository repos;
+    private final RoleRepository roleRepository;
     private final UserMapper mapper;
 
-    public UserService(UserRepository repos, UserMapper mapper) {
+    public UserService(UserRepository repos, RoleRepository roleRepository, UserMapper mapper) {
         this.repos = repos;
+        this.roleRepository = roleRepository;
         this.mapper = mapper;
     }
 
     public UserResponseDto saveUser(UserRequestDto userRequestDto) {
         User user = mapper.toEntity(userRequestDto);
+
+        user.getRoles().add(roleRepository.findById("ROLE_USER").orElseThrow(() -> new RuntimeException()));
 
         User savedUser = repos.save(user);
 
