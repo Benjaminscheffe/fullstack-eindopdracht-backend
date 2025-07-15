@@ -12,7 +12,7 @@ public class UserResponseDto {
     public String username;
     public String email;
     public String password;
-    public List<Order> orderList;
-    public List<Beat> beats;
+    public List<OrderResponseDto> orderList;
+    public List<BeatResponseDto> beats;
     public Set<Role> roles;
 }
