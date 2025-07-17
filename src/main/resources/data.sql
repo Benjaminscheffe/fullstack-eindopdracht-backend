@@ -1,4 +1,37 @@
+-- add available roles
 insert into roles(rolename) values ('ROLE_USER'), ('ROLE_ADMIN');
+
+-- application data filling
+insert into users(email, password, username) values
+     ('henk@hotmail.com', '1234', 'henk'),
+     ('klaas@hotmail.com', '1234', 'klaas'),
+     ('piet@hotmail.com', '1234', 'piet'),
+     ('puk@hotmail.com', '1234', 'puk');
+
+insert into images(name) values
+     ('image 1'),
+     ('image 2'),
+     ('image 3'),
+     ('image 4'),
+     ('image 5'),
+     ('image 6'),
+     ('image 7');
+
+insert into beats(bpm, price, image_id, user_id, title) values
+    (96, 10, 1,1, 'Beat 1'),
+    (70, 9, 2,1, 'Beat 2'),
+    (98, 10, 3,2, 'Beat 3'),
+    (100, 8, 4,4, 'Beat 4'),
+    (80, 8, 5,4, 'Beat 5'),
+    (110, 10, 6,3, 'Beat 6'),
+    (120, 11, 7,3, 'Beat 7');
+
+insert into reviews(score, beat_id, user_id, comment) values
+    (7, 2, 4, 'mooi hoor'),
+    (5, 2, 4, 'redelijk'),
+    (9, 3, 2, 'heel mooi hoor'),
+    (10, 6, 1, 'Beste!');
+
 
 
 

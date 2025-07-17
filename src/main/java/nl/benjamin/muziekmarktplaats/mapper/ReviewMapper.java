@@ -5,6 +5,9 @@ import nl.benjamin.muziekmarktplaats.dto.ReviewResponseDto;
 import nl.benjamin.muziekmarktplaats.model.Review;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ReviewMapper {
     public Review toEntity(ReviewRequestDto reviewRequestDto) {
@@ -20,5 +23,17 @@ public class ReviewMapper {
         reviewDto.beatId = review.getBeat().getId();
 
         return reviewDto;
+    }
+
+    public List<ReviewResponseDto> toListResponseDto(List<Review> reviewList) {
+        List<ReviewResponseDto> responseDtoList = new ArrayList<>();
+
+        for (Review review : reviewList) {
+            ReviewResponseDto responseDto = this.toResponseDto(review);
+
+            responseDtoList.add(responseDto);
+        }
+
+        return responseDtoList;
     }
 }
