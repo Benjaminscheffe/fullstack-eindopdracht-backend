@@ -1,18 +1,20 @@
 package nl.benjamin.muziekmarktplaats.model;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
 public class Order {
 
-    private static int counter = 2501;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_number_seq")
+    @SequenceGenerator(name = "order_number_seq", initialValue = 2501, allocationSize = 1)
     private Long id;
-    private int orderNumber;
-    private Date orderDate;
+
+    @Column(name = "order_date")
+    private LocalDateTime orderDate;
 
     @ManyToOne
     @JoinColumn(name = "beat_id")
@@ -24,8 +26,8 @@ public class Order {
 
     public Order() {}
 
-    public Order(Date orderDate) {
-        this.orderNumber = counter++;
+    public Order(LocalDateTime orderDate) {
+        //this.orderNumber = id + orderDate.getYear();
         this.orderDate = orderDate;
     }
 
@@ -33,15 +35,11 @@ public class Order {
         return id;
     }
 
-    public int getOrderNumber() {
-        return orderNumber;
-    }
-
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
