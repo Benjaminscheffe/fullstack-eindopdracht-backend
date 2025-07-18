@@ -11,11 +11,9 @@ import java.util.List;
 @Component
 public class BeatMapper {
 
-    private final OrderMapper orderMapper;
     private final ReviewMapper reviewMapper;
 
-    public BeatMapper(OrderMapper orderMapper, ReviewMapper reviewMapper) {
-        this.orderMapper = orderMapper;
+    public BeatMapper(ReviewMapper reviewMapper) {
         this.reviewMapper = reviewMapper;
     }
 
@@ -30,7 +28,6 @@ public class BeatMapper {
         beatDto.bpm = beat.getBpm();
         beatDto.price = beat.getPrice();
         beatDto.imageId = beat.getImage().getId();
-        beatDto.orders = orderMapper.toListResponseDto(beat.getOrders());
         beatDto.reviews = reviewMapper.toListResponseDto(beat.getReviews());
         beatDto.userId = beat.getUser().getId();
 
