@@ -12,7 +12,7 @@ public class BeatResponseDto {
     public int bpm;
     public int price;
     public Long imageId;
-    public List<Order> orders;
-    public List<Review> reviews;
+    public List<OrderResponseDto> orders;
+    public List<ReviewResponseDto> reviews;
     public Long userId;
 }

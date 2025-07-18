@@ -32,13 +32,11 @@ insert into reviews(score, beat_id, user_id, comment) values
     (9, 3, 2, 'heel mooi hoor'),
     (10, 6, 1, 'Beste!');
 
+
 insert into orders(id, order_date, beat_id, user_id) values
     (nextval('order_number_seq'),'2007-12-03 10:15:30', 1,4),
     (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 4),
     (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 4);
-
-
-
 
 
 

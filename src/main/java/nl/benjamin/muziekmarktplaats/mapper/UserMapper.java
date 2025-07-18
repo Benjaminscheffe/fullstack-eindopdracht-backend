@@ -7,6 +7,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
+    private final BeatMapper beatMapper;
+    private final OrderMapper orderMapper;
+
+    public UserMapper(BeatMapper beatMapper, OrderMapper orderMapper) {
+        this.beatMapper = beatMapper;
+        this.orderMapper = orderMapper;
+    }
+
     public User toEntity(UserRequestDto userRequestDto) {
 
         return new User(userRequestDto.username, userRequestDto.email, userRequestDto.password);
@@ -18,8 +26,8 @@ public class UserMapper {
         userDto.username = user.getUsername();
         userDto.email = user.getEmail();
         userDto.password = user.getPassword();
-        userDto.orderList = user.getOrders();
-        userDto.beats = user.getBeats();
+        userDto.orderList = orderMapper.toListResponseDto(user.getOrders());
+        userDto.beats = beatMapper.toListResponseDto(user.getBeats());
         userDto.roles = user.getRoles();
 
         return userDto;
