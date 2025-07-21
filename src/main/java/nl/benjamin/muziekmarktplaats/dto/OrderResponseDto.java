@@ -6,6 +6,6 @@ import java.util.Date;
 public class OrderResponseDto {
     public Long id;
     public LocalDateTime orderDate;
-    public BeatResponseDto beat;
+    public BeatResponseUserDto beat;
     public Long userId;
 }

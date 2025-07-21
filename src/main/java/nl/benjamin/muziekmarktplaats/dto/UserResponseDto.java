@@ -13,6 +13,6 @@ public class UserResponseDto {
     public String email;
     public String password;
     public List<OrderResponseDto> orderList;
-    public List<BeatResponseDto> beats;
+    public List<BeatResponseUserDto> beats;
     public Set<Role> roles;
 }

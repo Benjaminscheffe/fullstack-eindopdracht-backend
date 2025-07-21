@@ -26,8 +26,13 @@ public class UserMapper {
         userDto.username = user.getUsername();
         userDto.email = user.getEmail();
         userDto.password = user.getPassword();
-        userDto.orderList = orderMapper.toListResponseDto(user.getOrders());
-        userDto.beats = beatMapper.toListResponseDto(user.getBeats());
+        if (user.getOrders() != null) {
+            userDto.orderList = orderMapper.toListResponseDto(user.getOrders());
+        }
+        if (user.getBeats() != null) {
+            userDto.beats = beatMapper.toListResponseUserDto(user.getBeats());
+        }
+
         userDto.roles = user.getRoles();
 
         return userDto;
