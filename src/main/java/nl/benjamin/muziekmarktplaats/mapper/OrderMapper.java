@@ -11,6 +11,13 @@ import java.util.List;
 
 @Component
 public class OrderMapper {
+
+    private final BeatMapper beatMapper;
+
+    public OrderMapper(BeatMapper beatMapper) {
+        this.beatMapper = beatMapper;
+    }
+
     public Order toEntity(OrderRequestDto orderRequestDto) {
 
         return new Order(orderRequestDto.orderDate);
@@ -20,7 +27,7 @@ public class OrderMapper {
         OrderResponseDto orderDto = new OrderResponseDto();
         orderDto.id = order.getId();
         orderDto.orderDate = order.getOrderDate();
-        orderDto.beatId = order.getBeat().getId();
+        orderDto.beat = beatMapper.toResponseUserDto(order.getBeat());
         orderDto.userId = order.getUser().getId();
 
         return orderDto;

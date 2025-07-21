@@ -32,7 +32,14 @@ public class BeatService {
     }
 
     public BeatResponseDto saveBeat(BeatRequestDto beatRequestDto) {
-        Beat beat = mapper.toEntity(beatRequestDto);
+        Optional<User> optionalUser = userRepository.findById(beatRequestDto.userId);
+
+        if (optionalUser.isEmpty()) {
+            throw new  RecordNotFoundException("User not found!!!");
+        }
+        User user = optionalUser.get();
+
+        Beat beat = mapper.toEntityWithUser(beatRequestDto, user);
 
         Beat savedBeat = repos.save(beat);
 

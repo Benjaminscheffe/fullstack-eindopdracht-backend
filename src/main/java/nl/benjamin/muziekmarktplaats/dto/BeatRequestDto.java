@@ -15,6 +15,9 @@ public class BeatRequestDto {
     @NotBlank
     public int price;
 
+    @NotBlank
+    public Long userId;
+
     public String getTitle() {
         return title;
     }
