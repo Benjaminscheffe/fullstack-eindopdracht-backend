@@ -6,8 +6,10 @@ import nl.benjamin.muziekmarktplaats.dto.BeatResponseDto;
 import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.BeatMapper;
 import nl.benjamin.muziekmarktplaats.model.Beat;
+import nl.benjamin.muziekmarktplaats.model.BeatFile;
 import nl.benjamin.muziekmarktplaats.model.Image;
 import nl.benjamin.muziekmarktplaats.model.User;
+import nl.benjamin.muziekmarktplaats.repository.BeatFileRepository;
 import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.ImageRepository;
 import nl.benjamin.muziekmarktplaats.repository.UserRepository;
@@ -23,16 +25,20 @@ public class BeatService {
 
     private final BeatRepository repos;
     private final ImageRepository imageRepository;
+    private final BeatFileRepository beatFileRepository;
     private final UserRepository userRepository;
     private final BeatMapper mapper;
     private final ImageService imageService;
+    private final BeatFileService beatFileService;
 
-    public BeatService(BeatRepository repos, ImageRepository imageRepository, UserRepository userRepository, BeatMapper mapper, ImageService imageService) {
+    public BeatService(BeatRepository repos, ImageRepository imageRepository, BeatFileRepository beatFileRepository, UserRepository userRepository, BeatMapper mapper, ImageService imageService, BeatFileService beatFileService) {
         this.repos = repos;
         this.imageRepository = imageRepository;
+        this.beatFileRepository = beatFileRepository;
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.imageService = imageService;
+        this.beatFileService = beatFileService;
     }
 
     public BeatResponseDto saveBeat(BeatRequestDto beatRequestDto) {
@@ -95,13 +101,31 @@ public class BeatService {
         Optional<Image> optionalImage = imageRepository.findById(fileName);
 
         if(optionalBeat.isPresent() && optionalImage.isPresent()) {
-            Beat television = optionalBeat.get();
+            Beat beat = optionalBeat.get();
             Image image = optionalImage.get();
 
             // Beat owner dus daarin moet het gezet/gesaved worden
-            television.setImage(image);
+            beat.setImage(image);
 
-            return repos.save(television);
+            return repos.save(beat);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
+
+    @Transactional
+    public Beat assignFileToBeat(String fileName, Long id) {
+        Optional<Beat> optionalBeat = repos.findById(id);
+        Optional<BeatFile> optionalBeatFile = beatFileRepository.findById(fileName);
+
+        if(optionalBeat.isPresent() && optionalBeatFile.isPresent()) {
+            Beat beat = optionalBeat.get();
+            BeatFile file = optionalBeatFile.get();
+
+            // Beat owner dus daarin moet het gezet/gesaved worden
+            beat.setBeatFile(file);
+
+            return repos.save(beat);
         } else {
             throw new RecordNotFoundException();
         }
@@ -111,13 +135,26 @@ public class BeatService {
     public Resource getPhotoFromBeat(Long beatId){
         Optional<Beat> optionalBeat = repos.findById(beatId);
         if(optionalBeat.isEmpty()){
-            throw new RecordNotFoundException("Student with student number " + beatId + " not found.");
+            throw new RecordNotFoundException("Beat with id " + beatId + " not found.");
         }
         Image photo = optionalBeat.get().getImage();
         if(photo == null){
             throw new RecordNotFoundException("Student " + beatId + " had no photo.");
         }
         return imageService.downLoadFile(photo.getFileName());
+    }
+
+    @Transactional
+    public Resource getFileFromBeat(Long beatId){
+        Optional<Beat> optionalBeat = repos.findById(beatId);
+        if(optionalBeat.isEmpty()){
+            throw new RecordNotFoundException("Beat with id " + beatId + " not found.");
+        }
+        BeatFile beatFile = optionalBeat.get().getBeatFile();
+        if(beatFile == null){
+            throw new RecordNotFoundException("Student " + beatId + " had no photo.");
+        }
+        return beatFileService.downLoadFile(beatFile.getFileName());
     }
 
     public void assignUserToBeat(Long id, Long userId) {

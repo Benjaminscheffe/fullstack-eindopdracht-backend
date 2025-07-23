@@ -40,6 +40,9 @@ public class BeatMapper {
         if (beat.getImage() != null) {
             beatDto.image = beat.getImage();
         }
+        if (beat.getBeatFile() != null) {
+            beatDto.beatFile = beat.getBeatFile();
+        }
         if (beat.getReviews() != null) {
             beatDto.reviews = reviewMapper.toListResponseDto(beat.getReviews());
         }

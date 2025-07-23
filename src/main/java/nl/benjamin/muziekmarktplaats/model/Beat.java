@@ -20,6 +20,9 @@ public class Beat {
     @OneToOne
     Image image;
 
+    @OneToOne
+    BeatFile beatFile;
+
     @OneToMany(mappedBy = "beat")
     List<Order> orders;
 
@@ -36,6 +39,14 @@ public class Beat {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public BeatFile getBeatFile() {
+        return beatFile;
+    }
+
+    public void setBeatFile(BeatFile beatFile) {
+        this.beatFile = beatFile;
     }
 
     public Beat() {}

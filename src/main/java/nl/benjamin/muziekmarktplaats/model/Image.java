@@ -22,9 +22,7 @@ public class Image {
         this.fileName = fileName;
     }
 
-    public Image() {
-
-    }
+    public Image() {}
 //
 //    public Long getId() {
 //        return id;
