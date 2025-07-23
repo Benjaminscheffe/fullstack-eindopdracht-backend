@@ -8,23 +8,32 @@ insert into users(email, password, username) values
      ('piet@hotmail.com', '1234', 'piet'),
      ('puk@hotmail.com', '1234', 'puk');
 
-insert into images(name) values
-     ('image 1'),
-     ('image 2'),
-     ('image 3'),
-     ('image 4'),
-     ('image 5'),
-     ('image 6'),
-     ('image 7');
+-- insert into images(file_name) values
+--      ('image 1'),
+--      ('image 2'),
+--      ('image 3'),
+--      ('image 4'),
+--      ('image 5'),
+--      ('image 6'),
+--      ('image 7');
 
-insert into beats(bpm, price, image_id, user_id, title) values
+/*insert into beats(bpm, price, image_id, user_id, title) values
     (96, 10, 1,1, 'Beat 1'),
     (70, 9, 2,1, 'Beat 2'),
     (98, 10, 3,2, 'Beat 3'),
     (100, 8, 4,3, 'Beat 4'),
     (80, 8, 5,3, 'Beat 5'),
     (110, 10, 6,3, 'Beat 6'),
-    (120, 11, 7,3, 'Beat 7');
+    (120, 11, 7,3, 'Beat 7');*/
+
+insert into beats(bpm, price, user_id, title) values
+                                                            (96, 10,1, 'Beat 1'),
+                                                            (70, 9,1, 'Beat 2'),
+                                                            (98, 10,2, 'Beat 3'),
+                                                            (100, 8,3, 'Beat 4'),
+                                                            (80, 8,3, 'Beat 5'),
+                                                            (110, 10,3, 'Beat 6'),
+                                                            (120, 11,3, 'Beat 7');
 
 insert into reviews(score, beat_id, user_id, comment) values
     (7, 2, 4, 'mooi hoor'),

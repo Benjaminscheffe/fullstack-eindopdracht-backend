@@ -1,5 +1,6 @@
 package nl.benjamin.muziekmarktplaats.service;
 
+import jakarta.transaction.Transactional;
 import nl.benjamin.muziekmarktplaats.dto.BeatRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.BeatResponseDto;
 import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
@@ -10,6 +11,7 @@ import nl.benjamin.muziekmarktplaats.model.User;
 import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.ImageRepository;
 import nl.benjamin.muziekmarktplaats.repository.UserRepository;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,12 +25,14 @@ public class BeatService {
     private final ImageRepository imageRepository;
     private final UserRepository userRepository;
     private final BeatMapper mapper;
+    private final ImageService imageService;
 
-    public BeatService(BeatRepository repos, ImageRepository imageRepository, UserRepository userRepository, BeatMapper mapper) {
+    public BeatService(BeatRepository repos, ImageRepository imageRepository, UserRepository userRepository, BeatMapper mapper, ImageService imageService) {
         this.repos = repos;
         this.imageRepository = imageRepository;
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.imageService = imageService;
     }
 
     public BeatResponseDto saveBeat(BeatRequestDto beatRequestDto) {
@@ -85,9 +89,10 @@ public class BeatService {
         }
     }
 
-    public void assignImageToBeat(Long id, Long imageId) {
+    @Transactional
+    public Beat assignImageToBeat(String fileName, Long id) {
         Optional<Beat> optionalBeat = repos.findById(id);
-        Optional<Image> optionalImage = imageRepository.findById(imageId);
+        Optional<Image> optionalImage = imageRepository.findById(fileName);
 
         if(optionalBeat.isPresent() && optionalImage.isPresent()) {
             Beat television = optionalBeat.get();
@@ -96,10 +101,23 @@ public class BeatService {
             // Beat owner dus daarin moet het gezet/gesaved worden
             television.setImage(image);
 
-            repos.save(television);
+            return repos.save(television);
         } else {
             throw new RecordNotFoundException();
         }
+    }
+
+    @Transactional
+    public Resource getPhotoFromBeat(Long beatId){
+        Optional<Beat> optionalBeat = repos.findById(beatId);
+        if(optionalBeat.isEmpty()){
+            throw new RecordNotFoundException("Student with student number " + beatId + " not found.");
+        }
+        Image photo = optionalBeat.get().getImage();
+        if(photo == null){
+            throw new RecordNotFoundException("Student " + beatId + " had no photo.");
+        }
+        return imageService.downLoadFile(photo.getFileName());
     }
 
     public void assignUserToBeat(Long id, Long userId) {

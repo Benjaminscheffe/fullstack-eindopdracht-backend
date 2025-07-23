@@ -38,7 +38,7 @@ public class BeatMapper {
         beatDto.bpm = beat.getBpm();
         beatDto.price = beat.getPrice();
         if (beat.getImage() != null) {
-            beatDto.imageId = beat.getImage().getId();
+            beatDto.image = beat.getImage();
         }
         if (beat.getReviews() != null) {
             beatDto.reviews = reviewMapper.toListResponseDto(beat.getReviews());
@@ -55,7 +55,7 @@ public class BeatMapper {
         beatDto.bpm = beat.getBpm();
         beatDto.price = beat.getPrice();
         if (beat.getImage() != null) {
-            beatDto.imageId = beat.getImage().getId();
+            beatDto.image = beat.getImage();
         }
         beatDto.userId = beat.getUser().getId();
 

@@ -1,8 +1,6 @@
 package nl.benjamin.muziekmarktplaats.dto;
 
-import nl.benjamin.muziekmarktplaats.model.Order;
-import nl.benjamin.muziekmarktplaats.model.Review;
-import nl.benjamin.muziekmarktplaats.model.User;
+import nl.benjamin.muziekmarktplaats.model.Image;
 
 import java.util.List;
 
@@ -11,7 +9,7 @@ public class BeatResponseDto {
     public String title;
     public int bpm;
     public int price;
-    public Long imageId;
+    public Image image;
     public List<ReviewResponseDto> reviews;
     public Long userId;
 }
