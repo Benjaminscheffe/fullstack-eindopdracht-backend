@@ -1,6 +1,7 @@
 package nl.benjamin.muziekmarktplaats.service;
 
-import nl.benjamin.muziekmarktplaats.model.Image;
+import nl.benjamin.muziekmarktplaats.model.BeatFile;
+import nl.benjamin.muziekmarktplaats.repository.BeatFileRepository;
 import nl.benjamin.muziekmarktplaats.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -19,13 +20,13 @@ import java.util.Objects;
 
 
 @Service
-public class ImageService {
+public class BeatFileService {
     private final Path fileStoragePath;
     private final String fileStorageLocation;
-    private final ImageRepository repos;
+    private final BeatFileRepository repos;
 
 
-    public ImageService(@Value("${my.upload_location}") String fileStorageLocation, ImageRepository repos) throws IOException {
+    public BeatFileService(@Value("${my.upload_location2}") String fileStorageLocation, BeatFileRepository repos) throws IOException {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
         this.fileStorageLocation = fileStorageLocation;
         this.repos = repos;
@@ -40,7 +41,7 @@ public class ImageService {
 
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        repos.save(new Image(fileName));
+        repos.save(new BeatFile(fileName));
         return fileName;
     }
 
