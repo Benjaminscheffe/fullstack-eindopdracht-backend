@@ -2,8 +2,10 @@ package nl.benjamin.muziekmarktplaats.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "beatfiles")
 public class BeatFile {
 
     @Id
