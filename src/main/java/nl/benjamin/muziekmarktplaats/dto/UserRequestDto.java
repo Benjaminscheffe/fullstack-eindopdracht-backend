@@ -17,7 +17,8 @@ public class UserRequestDto {
     @Size(min=8, max=32)
     public String password;
 
-    public UserRequestDto(String email, String password) {
+    public UserRequestDto(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
 

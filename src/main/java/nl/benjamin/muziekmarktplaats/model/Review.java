@@ -35,6 +35,8 @@ public class Review {
         this.comment = comment;
     }
 
+    public void setId(Long id) { this.id = id; }
+
     public Long getId() {
         return id;
     }
