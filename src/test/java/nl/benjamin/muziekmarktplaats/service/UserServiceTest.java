@@ -39,7 +39,7 @@ class UserServiceTest {
 
     @Test
     void saveUser() {
-        // arrange
+        // Arrange
         User newuser = new User("Piet", "piet@hotmail.com","1234");
         newuser.setId(1L);
         Role role = new Role();
@@ -63,7 +63,7 @@ class UserServiceTest {
         // Act
         UserResponseDto userResponseDto = userService.saveUser(requestDto);
 
-        // assert
+        // Assert
         assertEquals("Piet", userResponseDto.username);
         assertEquals("piet@hotmail.com", userResponseDto.email);
         assertEquals("1234", userResponseDto.password);
@@ -72,15 +72,12 @@ class UserServiceTest {
 
     @Test
     void getAllUsers() {
-
-        // arrange
+        // Arrange
         User user1= new User("Klaas", "klaas@hotmail.com", "1234");
         User user2= new User("Hans", "hans@hotmail.com", "1234");
 
         user1.setId(1L);
         user2.setId(2L);
-
-        //when(userRepos.findAll());
 
         UserResponseDto expectedDto1 = new UserResponseDto();
         UserResponseDto expectedDto2 = new UserResponseDto();
@@ -103,19 +100,17 @@ class UserServiceTest {
         // Act
        List<UserResponseDto> usersFound = userService.getAllUsers();
 
-        // assert
+        // Assert
         assertEquals(expectedDto1, usersFound.get(0));
         assertEquals(expectedDto2, usersFound.get(1));
     }
 
     @Test
     void getUserById() {
-
-        // arrange
+        // Arrange
         User user= new User("Klaas", "klaas@hotmail.com", "1234");
 
         user.setId(1L);
-
 
         when(userRepos.findById(1L)).thenReturn(Optional.of(user));
 
@@ -131,29 +126,24 @@ class UserServiceTest {
         // Act
         UserResponseDto userResponseDto = userService.getUserById(1L);
 
-        // assert
+        // Assert
         assertEquals("Klaas", userResponseDto.username);
         assertEquals("klaas@hotmail.com", userResponseDto.email);
         assertEquals("1234", userResponseDto.password);
-
     }
 
     @Test
     void getUserByIdFailure() {
-
-        // arrange
-
+        // Arrange
         when(userRepos.findById(1L)).thenReturn(Optional.empty());
 
-        // Act
-
-        // assert
+        // Act - Assert
         assertThrows(RecordNotFoundException.class, () -> userService.getUserById(1L));
     }
 
     @Test
     void updateUser() {
-        // arrange
+        // Arrange
         User user= new User("Klaas", "klaas@hotmail.com", "1234");
         user.setId(1L);
 
@@ -174,7 +164,7 @@ class UserServiceTest {
         // Act
         UserResponseDto userUpdateResponseDto = userService.updateUser(1L, newUser);
 
-        // assert
+        // Assert
         assertEquals("Henk", userUpdateResponseDto.username);
         assertEquals("henk@hotmail.com", userUpdateResponseDto.email);
         assertEquals("5678", userUpdateResponseDto.password);
@@ -182,56 +172,11 @@ class UserServiceTest {
 
     @Test
     void updateUserFailure() {
-
-        // arrange
-
+        // Arrange
         when(userRepos.findById(1L)).thenReturn(Optional.empty());
         UserRequestDto newUser = new UserRequestDto("Henk","henk@hotmail.com", "5678");
-        // Act
 
-        // assert
+        // Act - Assert
         assertThrows(RecordNotFoundException.class, () -> userService.updateUser(1L, newUser));
     }
-
-   // @Test
-
-//    void updateUser2() {
-//
-//        // Arrange
-//
-//        User user = new User("Klaas", "Klaas@hotmail.com", "1234");
-//
-//        user.setId(1L);
-//
-//        UserRequestDto newUser = new UserRequestDto("henk@hotmail.com", "5678");
-//
-//        when(userRepos.findById(1L)).thenReturn(Optional.of(user));
-//
-//        when(userRepos.save(any(User.class))).thenReturn(user);
-//
-//        UserResponseDto expectedDto = new UserResponseDto();
-//
-//        expectedDto.id = 1L;
-//
-//        expectedDto.username = "Klaas";
-//
-//        expectedDto.email = "henk@hotmail.com";
-//
-//        expectedDto.password = "5678";
-//
-//        when(mapper.toResponseDto(any(User.class))).thenReturn(expectedDto);
-//
-//        // Act
-//
-//        UserResponseDto result = userService.updateUser(1L, newUser);
-//
-//        // Assert
-//
-//        assertEquals("Klaas", result.username);
-//
-//        assertEquals("henk@hotmail.com", result.email);
-//
-//        assertEquals("5678", result.password);
-//
-//    }
 }

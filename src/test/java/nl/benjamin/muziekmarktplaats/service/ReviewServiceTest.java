@@ -71,6 +71,7 @@ class ReviewServiceTest {
 
     @Test
     void getAllReviews() {
+        // Arrange
         Review review1 = new Review(10, "goed");
         review1.setId(1L);
 
@@ -95,7 +96,7 @@ class ReviewServiceTest {
         // Act
         List<ReviewResponseDto> reviewsFound = reviewService.getAllReviews();
 
-        // assert
+        // Assert
         assertEquals(expectedDto1, reviewsFound.get(0));
         assertEquals(expectedDto2, reviewsFound.get(1));
     }
@@ -119,7 +120,7 @@ class ReviewServiceTest {
         // Act
         ReviewResponseDto reviewResponseDto = reviewService.getReviewById(1L);
 
-        // assert
+        // Assert
         assertEquals(10, reviewResponseDto.score);
         assertEquals("goed", reviewResponseDto.comment);
     }
@@ -127,13 +128,11 @@ class ReviewServiceTest {
     @Test
     void getReviewByIdFailure() {
 
-        // arrange
+        // Arrange
 
         when(reviewRepos.findById(1L)).thenReturn(Optional.empty());
 
-        // Act
-
-        // assert
+        // Act - Assert
         assertThrows(RecordNotFoundException.class, () -> reviewService.getReviewById(1L));
     }
 
@@ -158,31 +157,30 @@ class ReviewServiceTest {
 
         when(mapper.toResponseDto(any(Review.class))).thenReturn(expectedDto);
 
+        // Act
         ReviewResponseDto reviewUpdateResponseDto = reviewService.updateReview(1L, newReview);
 
+        // Assert
         assertEquals(6, reviewUpdateResponseDto.score);
         assertEquals("mwah", reviewUpdateResponseDto.comment);
     }
 
     @Test
     void updateReviewFailure() {
-
-        // arrange
-
+        // Arrange
         when(reviewRepos.findById(1L)).thenReturn(Optional.empty());
         ReviewRequestDto newReview = new ReviewRequestDto();
 
         newReview.score = 9;
         newReview.comment = "heel goed";
 
-        // Act
-
-        // assert
+        // Act - Assert
         assertThrows(RecordNotFoundException.class, () -> reviewService.updateReview(1L, newReview));
     }
 
     @Test
     void assignBeatToReview() {
+        // Arrange
         Review review = new Review(10, "goed");
         review.setId(1L);
         Beat beat = new Beat("Beat", 122, 9);
@@ -191,25 +189,25 @@ class ReviewServiceTest {
         when(reviewRepos.findById(1L)).thenReturn(Optional.of(review));
         when(beatRepos.findById(1L)).thenReturn(Optional.of(beat));
 
-        ReviewResponseDto expectedReviewDto = new ReviewResponseDto();
-
-        expectedReviewDto.score = 10;
-        expectedReviewDto.comment = "goed";
-
-        BeatResponseDto expectedBeatDto = new BeatResponseDto();
-
-        expectedBeatDto.title = "Beat";
-        expectedBeatDto.bpm = 122;
-        expectedBeatDto.price = 9;
-
-        when(mapper.toResponseDto(review)).thenReturn(expectedReviewDto);
-        when(beatMapper.toResponseDto(beat)).thenReturn(expectedBeatDto);
-
-
+        //Act
         reviewService.assignBeatToReview(1L, 1L);
 
-
+        // Assert
         assertEquals(1L, review.getBeat().getId());
+
+    }
+
+    @Test
+    void assignBeatToReviewFailure() {
+        //Arrange
+        Beat beat = new Beat("Beat", 122, 9);
+        beat.setId(1L);
+
+        when(reviewRepos.findById(1L)).thenReturn(Optional.empty());
+        when(beatRepos.findById(1L)).thenReturn(Optional.of(beat));
+
+        // Act - Assert
+        assertThrows(RecordNotFoundException.class, () -> reviewService.assignBeatToReview(1L, 1L));
 
     }
 
