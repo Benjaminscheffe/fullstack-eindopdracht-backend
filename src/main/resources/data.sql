@@ -37,19 +37,16 @@ insert into beats(bpm, price, user_id, title, beat_file_file_name, image_file_na
     (120, 11,3, 'Beat 7', 'test-track7.mp3', 'test-track-image7.jpg');
 
 
--- insert into reviews(score, beat_id, user_id, comment) values
---     (7, 2, 4, 'mooi hoor'),
---     (5, 2, 4, 'redelijk'),
---     (9, 3, 2, 'heel mooi hoor'),
---     (10, 6, 1, 'Beste!');
+insert into reviews(score, beat_id, user_id, comment) values
+    (7, 2, 4, 'mooi hoor'),
+    (5, 2, 4, 'redelijk'),
+    (9, 3, 2, 'heel mooi hoor'),
+    (10, 6, 1, 'Beste!');
 
 
 insert into orders(id, order_date, beat_id, user_id) values
-    (nextval('order_number_seq'),'2007-12-03 10:15:30', 1,4);
---     (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 4),
---     (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 4);
+    (nextval('order_number_seq'),'2007-12-03 10:15:30', 1,4),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 4),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 4);
 
 
-
--- insert into users(username, password) values ('klaas', '$2a$12$kGrAOI4f0AYA.YXUAinxju6N6r4bCm5xEIAwPm/Q/xbyOOUfiiW/W');
--- insert into users_roles(roles_rolename, users_username) values ('ROLE_USER', 'klaas'), ('ROLE_ADMIN', 'klaas');
