@@ -1,12 +1,12 @@
 -- add available roles
 insert into roles(rolename) values ('ROLE_USER'), ('ROLE_ADMIN');
 
--- application data filling
+-- application data filling ww = 1234
 insert into users(email, password, username) values
-     ('henk@hotmail.com', '1234', 'henk'),
-     ('klaas@hotmail.com', '1234', 'klaas'),
-     ('piet@hotmail.com', '1234', 'piet'),
-     ('puk@hotmail.com', '1234', 'puk');
+     ('henk@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'henk'),
+     ('klaas@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'klaas'),
+     ('piet@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'piet'),
+     ('puk@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'puk');
 
 insert into images(file_name) values
     ('test-track-image.jpg'),

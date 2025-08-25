@@ -10,6 +10,8 @@ public class ReviewRequestDto {
     @NotBlank
     public String comment;
 
+    public Long beatId;
+
     public int getScore() {
         return score;
     }

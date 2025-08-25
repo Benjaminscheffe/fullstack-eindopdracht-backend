@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_number_seq")
-    @SequenceGenerator(name = "order_number_seq", initialValue = 2501, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long orderNumber;
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
@@ -24,6 +24,11 @@ public class Order {
     @JoinColumn(name = "user_id")
     User user;
 
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+
     public Order() {}
 
     public Order(LocalDateTime orderDate) {
@@ -33,6 +38,10 @@ public class Order {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getOrderNumber() {
+        return orderNumber;
     }
 
     public LocalDateTime getOrderDate() {

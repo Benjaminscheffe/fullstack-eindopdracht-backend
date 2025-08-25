@@ -1,9 +1,14 @@
 package nl.benjamin.muziekmarktplaats.controller;
 
+import io.jsonwebtoken.Jwt;
 import nl.benjamin.muziekmarktplaats.dto.ReviewRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.ReviewResponseDto;
+import nl.benjamin.muziekmarktplaats.model.User;
 import nl.benjamin.muziekmarktplaats.service.ReviewService;
+import nl.benjamin.muziekmarktplaats.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,14 +20,17 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService service;
+    private final UserService userService;
 
-    public ReviewController(ReviewService service) {
+    public ReviewController(ReviewService service, UserService userService) {
         this.service = service;
+        this.userService = userService;
     }
 
     @PostMapping
-    public ResponseEntity<ReviewResponseDto> addReview(@RequestBody ReviewRequestDto reviewRequestDto) {
-        ReviewResponseDto review = service.saveReview(reviewRequestDto);
+    public ResponseEntity<ReviewResponseDto> addReview(@RequestBody ReviewRequestDto reviewRequestDto, @AuthenticationPrincipal UserDetails userDetails) {
+        Long userId = userService.getUserByUsername(userDetails.getUsername()).id;
+        ReviewResponseDto review = service.saveReview(reviewRequestDto, userId);
 
         URI uri = URI.create(ServletUriComponentsBuilder
                 .fromCurrentRequest()

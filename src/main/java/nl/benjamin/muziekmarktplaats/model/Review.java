@@ -20,6 +20,11 @@ public class Review {
     @JoinColumn(name = "user_id")
     User user;
 
+    public Review(int score, String comment) {
+        this.score = score;
+        this.comment = comment;
+    }
+
     public void setBeat(Beat beat) {
         this.beat = beat;
     }
@@ -30,9 +35,11 @@ public class Review {
 
     public Review(){}
 
-    public Review(int score, String comment) {
+    public Review(int score, String comment, Beat beat, User user) {
         this.score = score;
         this.comment = comment;
+        this.beat = beat;
+        this.user = user;
     }
 
     public void setId(Long id) { this.id = id; }

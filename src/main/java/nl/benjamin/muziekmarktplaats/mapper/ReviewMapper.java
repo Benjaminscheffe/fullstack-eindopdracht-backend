@@ -2,7 +2,9 @@ package nl.benjamin.muziekmarktplaats.mapper;
 
 import nl.benjamin.muziekmarktplaats.dto.ReviewRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.ReviewResponseDto;
+import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.Review;
+import nl.benjamin.muziekmarktplaats.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,9 +13,14 @@ import java.util.List;
 @Component
 public class ReviewMapper {
 
-    public Review toEntity(ReviewRequestDto reviewRequestDto) {
+    public Review toEntity(ReviewRequestDto reviewRequestDto, Long userId) {
+        Beat beat = new Beat();
+        User user = new User();
 
-        return new Review(reviewRequestDto.score, reviewRequestDto.comment);
+        beat.setId(reviewRequestDto.beatId);
+        user.setId(userId);
+
+        return new Review(reviewRequestDto.score, reviewRequestDto.comment, beat, user);
     }
 
     public ReviewResponseDto toResponseDto(Review review) {

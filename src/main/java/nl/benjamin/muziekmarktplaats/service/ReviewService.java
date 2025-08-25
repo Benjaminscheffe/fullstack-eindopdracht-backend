@@ -6,6 +6,7 @@ import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
 import nl.benjamin.muziekmarktplaats.mapper.ReviewMapper;
 import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.Review;
+import nl.benjamin.muziekmarktplaats.model.User;
 import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class ReviewService {
         this.mapper = mapper;
     }
 
-    public ReviewResponseDto saveReview(ReviewRequestDto reviewRequestDto) {
-        Review review = mapper.toEntity(reviewRequestDto);
+    public ReviewResponseDto saveReview(ReviewRequestDto reviewRequestDto, Long userId) {
+        Review review = mapper.toEntity(reviewRequestDto, userId);
 
         Review savedReview = repos.save(review);
 
