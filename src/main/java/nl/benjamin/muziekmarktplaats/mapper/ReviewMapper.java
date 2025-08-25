@@ -10,6 +10,7 @@ import java.util.List;
 
 @Component
 public class ReviewMapper {
+
     public Review toEntity(ReviewRequestDto reviewRequestDto) {
 
         return new Review(reviewRequestDto.score, reviewRequestDto.comment);
@@ -21,6 +22,7 @@ public class ReviewMapper {
         reviewDto.score = review.getScore();
         reviewDto.comment = review.getComment();
         reviewDto.beatId = review.getBeat().getId();
+        reviewDto.username = review.getUser().getUsername();
 
         return reviewDto;
     }

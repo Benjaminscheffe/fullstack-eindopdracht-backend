@@ -56,6 +56,15 @@ public class Beat {
         this.bpm = bpm;
         this.price = price;
     }
+
+    public Beat(String title, int bpm, int price, Image image, BeatFile beatFile) {
+        this.title = title;
+        this.bpm = bpm;
+        this.price = price;
+        this.image = image;
+        this.beatFile = beatFile;
+    }
+
     public Long getId() {
         return id;
     }
