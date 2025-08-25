@@ -36,6 +36,10 @@ public class OrderService {
 
         Order savedOrder = repos.save(order);
 
+        savedOrder.setOrderNumber(savedOrder.getId() + savedOrder.getOrderDate().getYear());
+
+        repos.save(savedOrder);
+
         OrderResponseDto dto = mapper.toResponseDto(savedOrder);
 
         return dto;

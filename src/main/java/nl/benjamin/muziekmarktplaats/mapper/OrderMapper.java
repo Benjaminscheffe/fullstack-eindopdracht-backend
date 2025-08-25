@@ -27,7 +27,7 @@ public class OrderMapper {
         OrderResponseDto orderDto = new OrderResponseDto();
         orderDto.id = order.getId();
         orderDto.orderDate = order.getOrderDate();
-        orderDto.beat = beatMapper.toResponseUserDto(order.getBeat());
+        orderDto.beatId = beatMapper.toResponseUserDto(order.getBeat()).id;
         orderDto.userId = order.getUser().getId();
 
         return orderDto;

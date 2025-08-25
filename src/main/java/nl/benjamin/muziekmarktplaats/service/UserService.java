@@ -1,5 +1,6 @@
 package nl.benjamin.muziekmarktplaats.service;
 
+import jakarta.transaction.Transactional;
 import nl.benjamin.muziekmarktplaats.dto.UserRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.UserResponseDto;
 import nl.benjamin.muziekmarktplaats.exception.RecordNotFoundException;
@@ -50,6 +51,7 @@ public class UserService {
         return userDtoList;
     }
 
+    @Transactional
     public UserResponseDto getUserById(Long id) {
         Optional<User> user = repos.findById(id);
 
@@ -57,6 +59,17 @@ public class UserService {
             return mapper.toResponseDto(user.get());
         } else {
             throw new RecordNotFoundException("No user with id " + id);
+        }
+    }
+
+    @Transactional
+    public UserResponseDto getUserByUsername(String username) {
+        Optional<User> user = repos.findByUsername(username);
+
+        if (user.isPresent()) {
+            return mapper.toResponseDto(user.get());
+        } else {
+            throw new RecordNotFoundException("No user with name " + username);
         }
     }
 

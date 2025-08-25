@@ -47,7 +47,7 @@ class ReviewServiceTest {
         newReview.setId(1L);
 
         when(reviewRepos.save(any(Review.class))).thenReturn(newReview);
-        when(mapper.toEntity(any(ReviewRequestDto.class))).thenReturn(newReview);
+        when(mapper.toEntity(any(ReviewRequestDto.class), any(Long.class))).thenReturn(newReview);
 
         ReviewResponseDto expectedDto = new ReviewResponseDto();
 
@@ -62,7 +62,7 @@ class ReviewServiceTest {
         when(mapper.toResponseDto(any(Review.class))).thenReturn(expectedDto);
 
         // Act
-        ReviewResponseDto reviewResponseDto = reviewService.saveReview(requestDto);
+        ReviewResponseDto reviewResponseDto = reviewService.saveReview(requestDto, 1L);
 
         // Assert
         assertEquals(10, reviewResponseDto.score);
