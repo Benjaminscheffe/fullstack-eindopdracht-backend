@@ -133,12 +133,48 @@ class UserServiceTest {
     }
 
     @Test
+    void getUserByUsername() {
+        // Arrange
+        User user= new User("Klaas", "klaas@hotmail.com", "1234");
+
+        user.setId(1L);
+
+        when(userRepos.findByUsername("Klaas")).thenReturn(Optional.of(user));
+
+        UserResponseDto expectedDto = new UserResponseDto();
+
+        expectedDto.id = 1L;
+        expectedDto.username = "Klaas";
+        expectedDto.email = "klaas@hotmail.com";
+        expectedDto.password = "1234";
+
+        when(mapper.toResponseDto(user)).thenReturn(expectedDto);
+
+        // Act
+        UserResponseDto userResponseDto = userService.getUserByUsername("Klaas");
+
+        // Assert
+        assertEquals("Klaas", userResponseDto.username);
+        assertEquals("klaas@hotmail.com", userResponseDto.email);
+        assertEquals("1234", userResponseDto.password);
+    }
+
+    @Test
     void getUserByIdFailure() {
         // Arrange
         when(userRepos.findById(1L)).thenReturn(Optional.empty());
 
         // Act - Assert
         assertThrows(RecordNotFoundException.class, () -> userService.getUserById(1L));
+    }
+
+    @Test
+    void getUserByUsernameFailure() {
+        // Arrange
+        when(userRepos.findByUsername("Klaas")).thenReturn(Optional.empty());
+
+        // Act - Assert
+        assertThrows(RecordNotFoundException.class, () -> userService.getUserByUsername("Klaas"));
     }
 
     @Test
