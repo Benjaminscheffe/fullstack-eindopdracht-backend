@@ -3,11 +3,16 @@ package nl.benjamin.muziekmarktplaats.controller;
 import nl.benjamin.muziekmarktplaats.dto.UserRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.UserResponseDto;
 import nl.benjamin.muziekmarktplaats.service.UserService;
+import nl.benjamin.muziekmarktplaats.utils.JwtUtil;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -15,9 +20,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService service;
+    private final JwtUtil jwtUtil;
 
-    public UserController(UserService service) {
+    public UserController(UserService service, JwtUtil jwtUtil) {
         this.service = service;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping
@@ -39,10 +46,19 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDto> getUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getUserById(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails jwt) {
+
         UserResponseDto user = service.getUserById(id);
 
-        return ResponseEntity.ok().body(user);
+        System.out.println(jwt);
+
+        if (user.username.equals(jwt.getUsername())) {
+            return ResponseEntity.ok().body(user);
+        } else {
+            return ResponseEntity.status(401).build();
+        }
+
+
     }
 
     @PutMapping("/{id}")

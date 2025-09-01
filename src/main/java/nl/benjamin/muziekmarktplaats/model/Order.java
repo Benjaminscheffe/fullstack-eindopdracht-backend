@@ -11,7 +11,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long orderNumber;
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
@@ -24,24 +23,14 @@ public class Order {
     @JoinColumn(name = "user_id")
     User user;
 
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-
     public Order() {}
 
     public Order(LocalDateTime orderDate) {
-        //this.orderNumber = id + orderDate.getYear();
         this.orderDate = orderDate;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public Long getOrderNumber() {
-        return orderNumber;
     }
 
     public LocalDateTime getOrderDate() {
