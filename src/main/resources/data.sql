@@ -15,7 +15,6 @@ insert into users_roles (users_id, roles_rolename) values
     (4, 'ROLE_USER'),
     (1, 'ROLE_ADMIN');
 
-
 insert into images(file_name) values
     ('test-track-image.jpg'),
     ('test-track-image2.jpg'),
