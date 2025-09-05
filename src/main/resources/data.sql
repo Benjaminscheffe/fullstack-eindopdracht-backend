@@ -8,6 +8,14 @@ insert into users(email, password, username) values
      ('piet@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'piet'),
      ('puk@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'puk');
 
+insert into users_roles (users_id, roles_rolename) values
+    (1, 'ROLE_USER'),
+    (2, 'ROLE_USER'),
+    (3, 'ROLE_USER'),
+    (4, 'ROLE_USER'),
+    (1, 'ROLE_ADMIN');
+
+
 insert into images(file_name) values
     ('test-track-image.jpg'),
     ('test-track-image2.jpg'),
@@ -45,7 +53,9 @@ insert into reviews(score, beat_id, user_id, comment) values
 
 
 insert into orders(id, order_date, beat_id, user_id) values
-    (nextval('order_number_seq'),'2007-12-03 10:15:30', 1,4),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30', 1,1),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 1),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 1),
     (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 4),
     (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 4);
 
