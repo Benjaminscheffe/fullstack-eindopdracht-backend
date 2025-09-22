@@ -61,6 +61,4 @@ public class OrderController {
     public void assignUserToOrder(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
         service.assignUserToOrder(id, userId);
     }
-
-
 }

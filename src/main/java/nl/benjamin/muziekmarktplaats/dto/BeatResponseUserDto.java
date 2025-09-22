@@ -8,5 +8,5 @@ public class BeatResponseUserDto {
     public int bpm;
     public int price;
     public Image image;
-    public Long userId;
+    public String userName;
 }

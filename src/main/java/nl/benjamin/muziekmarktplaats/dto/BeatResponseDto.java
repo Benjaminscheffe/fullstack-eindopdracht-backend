@@ -13,5 +13,5 @@ public class BeatResponseDto {
     public Image image;
     public BeatFile beatFile;
     public List<ReviewResponseDto> reviews;
-    public Long userId;
+    public String userName;
 }

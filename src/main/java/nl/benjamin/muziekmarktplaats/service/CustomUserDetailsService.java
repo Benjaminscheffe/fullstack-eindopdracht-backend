@@ -25,21 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userService = userService;
     }
 
-    public UserDetails loadUserById(Long id) {
-        UserResponseDto userDto = userService.getUserById(id);
-
-
-        String password = userDto.password;
-
-        Set<Role> authorities = userDto.roles;
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Role role: authorities) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRolename()));
-        }
-
-        return new org.springframework.security.core.userdetails.User(userDto.username, password, grantedAuthorities);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserResponseDto userDto = userService.getUserByUsername(username);
@@ -54,5 +39,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         return new org.springframework.security.core.userdetails.User(userDto.username, password, grantedAuthorities);
+    }
+
+    public Long getUserIdByUsername(String username) {
+        return userService.getUserByUsername(username).id;
     }
 }

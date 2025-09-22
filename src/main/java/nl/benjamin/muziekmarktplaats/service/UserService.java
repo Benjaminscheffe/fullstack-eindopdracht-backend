@@ -1,5 +1,4 @@
 package nl.benjamin.muziekmarktplaats.service;
-
 import jakarta.transaction.Transactional;
 import nl.benjamin.muziekmarktplaats.dto.UserRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.UserResponseDto;
@@ -8,8 +7,8 @@ import nl.benjamin.muziekmarktplaats.mapper.UserMapper;
 import nl.benjamin.muziekmarktplaats.model.User;
 import nl.benjamin.muziekmarktplaats.repository.RoleRepository;
 import nl.benjamin.muziekmarktplaats.repository.UserRepository;
+import static nl.benjamin.muziekmarktplaats.config.SpringSecurityConfig.passwordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,17 +19,20 @@ public class UserService {
     private final UserRepository repos;
     private final RoleRepository roleRepository;
     private final UserMapper mapper;
+    //private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository repos, RoleRepository roleRepository, UserMapper mapper) {
         this.repos = repos;
         this.roleRepository = roleRepository;
         this.mapper = mapper;
+        //this.passwordEncoder = passwordEncoder;
     }
 
     public UserResponseDto saveUser(UserRequestDto userRequestDto) {
         User user = mapper.toEntity(userRequestDto);
 
         user.getRoles().add(roleRepository.findById("ROLE_USER").orElseThrow(() -> new RuntimeException()));
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
 
         User savedUser = repos.save(user);
 

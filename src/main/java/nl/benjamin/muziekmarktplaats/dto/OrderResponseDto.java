@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class OrderResponseDto {
     public Long id;
-    public Long orderNumber;
     public LocalDateTime orderDate;
     public Long beatId;
     public Long userId;

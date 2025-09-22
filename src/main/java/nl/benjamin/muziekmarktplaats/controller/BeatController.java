@@ -127,10 +127,10 @@ public class BeatController {
         service.assignUserToBeat(id, userId);
     }
 
-
-
-
-
+    @DeleteMapping("/{id}")
+    public void deleteBeat(@PathVariable("id") Long id) {
+        service.deleteBeat(id);
+    }
 
 
     @PostMapping("/{id}/file")
