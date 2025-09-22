@@ -46,7 +46,7 @@ public class BeatMapper {
         if (beat.getReviews() != null) {
             beatDto.reviews = reviewMapper.toListResponseDto(beat.getReviews());
         }
-        beatDto.userId = beat.getUser().getId();
+        beatDto.userName = beat.getUser().getUsername();
 
         return beatDto;
     }
@@ -60,7 +60,7 @@ public class BeatMapper {
         if (beat.getImage() != null) {
             beatDto.image = beat.getImage();
         }
-        beatDto.userId = beat.getUser().getId();
+        beatDto.userName = beat.getUser().getUsername();
 
         return beatDto;
     }

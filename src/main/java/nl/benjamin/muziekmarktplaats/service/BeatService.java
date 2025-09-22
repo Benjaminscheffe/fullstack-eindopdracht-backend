@@ -58,6 +58,18 @@ public class BeatService {
         return dto;
     }
 
+    public void deleteBeat(Long id) {
+        Optional<Beat> optionalBeat = repos.findById(id);
+
+        if (optionalBeat.isEmpty()) {
+            throw new RecordNotFoundException("Beat not found!!!");
+        }
+
+        Beat beat = optionalBeat.get();
+
+        repos.delete(beat);
+    }
+
     public List<BeatResponseDto> getAllBeats() {
         List<Beat> beatList = repos.findAll();
         List<BeatResponseDto> beatDtoList = new ArrayList<>();
@@ -86,6 +98,8 @@ public class BeatService {
         if(beatOptional.isPresent()) {
             Beat beat = beatOptional.get();
             beat.setTitle(beatRequestDto.getTitle());
+            beat.setBpm(beatRequestDto.getBpm());
+            beat.setPrice(beatRequestDto.getPrice());
 
             Beat returnBeat = repos.save(beat);
 

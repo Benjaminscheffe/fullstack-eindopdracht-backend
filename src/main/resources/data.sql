@@ -3,10 +3,10 @@ insert into roles(rolename) values ('ROLE_USER'), ('ROLE_ADMIN');
 
 -- application data filling ww = 1234
 insert into users(email, password, username) values
-     ('henk@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'henk'),
-     ('klaas@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'klaas'),
-     ('piet@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'piet'),
-     ('puk@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'puk');
+     ('dre@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'Dre Dre'),
+     ('timbaland@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'Timbaland'),
+     ('scott_s@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'Scott Storch'),
+     ('dj_premier@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'DJ Premier');
 
 insert into users_roles (users_id, roles_rolename) values
     (1, 'ROLE_USER'),
@@ -46,7 +46,7 @@ insert into beats(bpm, price, user_id, title, beat_file_file_name, image_file_na
 
 insert into reviews(score, beat_id, user_id, comment) values
     (7, 2, 4, 'mooi hoor'),
-    (5, 2, 4, 'redelijk'),
+    (5, 2, 3, 'redelijk'),
     (9, 3, 2, 'heel mooi hoor'),
     (10, 6, 1, 'Beste!');
 
