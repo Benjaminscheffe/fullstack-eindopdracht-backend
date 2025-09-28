@@ -62,11 +62,38 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 // Wanneer je deze uncomments, staat je hele security open. Je hebt dan alleen nog een jwt nodig.
-                .requestMatchers("/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+              //.requestMatchers("/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/users/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT,"/users/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.POST, "/reviews").hasRole("USER")
+                .requestMatchers(HttpMethod.GET,"/reviews").permitAll()
+                .requestMatchers(HttpMethod.GET,"/reviews/{id}").permitAll()
+                .requestMatchers(HttpMethod.PUT,"/reviews/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/reviews/{reviewId}/beat/{beatId}").hasRole("USER")
+
+                .requestMatchers(HttpMethod.POST, "/orders").hasRole("USER")
+                .requestMatchers(HttpMethod.GET,"/orders").hasRole("USER")
+                .requestMatchers(HttpMethod.GET,"/orders/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/orders/{orderId}/beat/{beatId}").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/orders/{orderId}/user/{userId}").hasRole("USER")
+
+                .requestMatchers(HttpMethod.POST, "/beats").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/beats/{id}/image").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/beats/{id}/file").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/beats/{id}/image").permitAll()
+                .requestMatchers(HttpMethod.GET, "/beats/{id}/file").permitAll()
+
+                .requestMatchers(HttpMethod.GET,"/beats").permitAll()
+                .requestMatchers(HttpMethod.GET,"/beats/{id}").permitAll()
+                .requestMatchers(HttpMethod.PUT,"/beats/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT,"/beats/{beatId}/user/{userId}").hasRole("USER")
+                .requestMatchers(HttpMethod.DELETE,"/beats/{id}").denyAll()
+
+
                 /*TODO voeg de antmatchers toe voor admin(post en delete) en user (overige)*/
                 .requestMatchers("/authenticated").authenticated()
                 .requestMatchers("/authenticate").permitAll()/*alleen dit punt mag toegankelijk zijn voor niet ingelogde gebruikers*/

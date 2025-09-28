@@ -96,46 +96,9 @@ public class BeatController {
                 .body(resource);
     }
 
-    @GetMapping
-    public ResponseEntity<List<BeatResponseDto>> getAllBeats() {
-        List<BeatResponseDto> beats = service.getAllBeats();
-
-        return ResponseEntity.ok().body(beats);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<BeatResponseDto> getBeatById(@PathVariable("id") Long id) {
-        BeatResponseDto beat = service.getBeatById(id);
-
-        return ResponseEntity.ok().body(beat);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<BeatResponseDto> updateBeat(@PathVariable("id") Long id, @RequestBody BeatRequestDto beatRequestDto) {
-        BeatResponseDto dto = service.updateBeat(id, beatRequestDto);
-
-        return ResponseEntity.ok().body(dto);
-    }
-
-//    @PutMapping("/{id}/image/{imageId}")
-//    public void assignImageToBeat(@PathVariable("id") Long id, @PathVariable("imageId") Long imageId) {
-//        service.assignImageToBeat(id, imageId);
-//    }
-
-    @PutMapping("/{id}/user/{userId}")
-    public void assignUserToBeat(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
-        service.assignUserToBeat(id, userId);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteBeat(@PathVariable("id") Long id) {
-        service.deleteBeat(id);
-    }
-
-
     @PostMapping("/{id}/file")
     public ResponseEntity<BeatResponseDto> addFileToBeat(@PathVariable("id") Long beatId,
-                                                              @RequestBody MultipartFile file)
+                                                         @RequestBody MultipartFile file)
             throws IOException {
         System.out.println(file);
         String url = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -170,5 +133,35 @@ public class BeatController {
                 .body(resource);
     }
 
+    @GetMapping
+    public ResponseEntity<List<BeatResponseDto>> getAllBeats() {
+        List<BeatResponseDto> beats = service.getAllBeats();
+
+        return ResponseEntity.ok().body(beats);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BeatResponseDto> getBeatById(@PathVariable("id") Long id) {
+        BeatResponseDto beat = service.getBeatById(id);
+
+        return ResponseEntity.ok().body(beat);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BeatResponseDto> updateBeat(@PathVariable("id") Long id, @RequestBody BeatRequestDto beatRequestDto) {
+        BeatResponseDto dto = service.updateBeat(id, beatRequestDto);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping("/{id}/user/{userId}")
+    public void assignUserToBeat(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
+        service.assignUserToBeat(id, userId);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBeat(@PathVariable("id") Long id) {
+        service.deleteBeat(id);
+    }
 
 }
