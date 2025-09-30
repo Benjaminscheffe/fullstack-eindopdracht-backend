@@ -16,7 +16,6 @@ public class Beat {
     private int bpm;
     private int price;
 
-
     @OneToOne
     Image image;
 

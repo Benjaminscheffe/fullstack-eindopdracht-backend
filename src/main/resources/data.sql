@@ -1,7 +1,7 @@
 -- add available roles
 insert into roles(rolename) values ('ROLE_USER'), ('ROLE_ADMIN');
 
--- application data filling ww = 1234
+-- application data filling ww = 1234 for all users
 insert into users(email, password, username) values
      ('dre@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'Dr-Dre'),
      ('timbaland@hotmail.com', '$2a$12$wdbJFmo39J4304gC/izhhOkac1rIa8tZXGdPQXcCku7eLZRlF6NT2', 'Timbaland'),
@@ -35,7 +35,6 @@ insert into beatfiles(file_name) values
     ('when-the-music-stops.mp3'),
     ('livin-proof.mp3');
 
-
 insert into beats(bpm, price, user_id, title, beat_file_file_name, image_file_name) values
     (96, 10,1, 'Xxplosive', 'xxplosive.mp3', 'xxplosive.jpg'),
     (70, 9,1, 'Break Ya Neck', 'break-ya-neck.mp3', 'break-ya-neck.jpg'),
@@ -45,7 +44,6 @@ insert into beats(bpm, price, user_id, title, beat_file_file_name, image_file_na
     (110, 10,5, 'When The Music Stops', 'when-the-music-stops.mp3', 'when-the-music-stops.jpg'),
     (120, 11,4, 'Livin'' Proof', 'livin-proof.mp3', 'livin-proof.jpg');
 
-
 insert into reviews(score, beat_id, user_id, comment) values
     (7, 2, 4, 'Real neck breaker!!!'),
     (8, 2, 3, 'That''s some real Timbaland shit'),
@@ -53,12 +51,13 @@ insert into reviews(score, beat_id, user_id, comment) values
     (8, 3, 5, 'West Coast Representing!! '),
     (9, 6, 1, 'Eminem behind the knobs, that''s the shit!');
 
-
 insert into orders(id, order_date, beat_id, user_id) values
-    (nextval('order_number_seq'),'2007-12-03 10:15:30', 1,1),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 1),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30', 4,1),
     (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 1),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 2),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 3),
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',1, 4),
     (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 4),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 4);
+    (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 5);
 
 
