@@ -9,7 +9,6 @@
 6. Project lokaal draaien  
 7. Testen  
 8. Gebruikers en autorisatie  
-9. Voorbeelden & Screenshots  
 
 ---
 
