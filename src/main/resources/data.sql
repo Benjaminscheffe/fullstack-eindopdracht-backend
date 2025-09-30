@@ -40,7 +40,7 @@ insert into beats(bpm, price, user_id, title, beat_file_file_name, image_file_na
     (70, 9,1, 'Break Ya Neck', 'break-ya-neck.mp3', 'break-ya-neck.jpg'),
     (98, 10,2, 'Get Ur Freak On', 'get-ur-freak-on.mp3', 'get-ur-freak-on.jpg'),
     (100, 8,3, 'Still Dre', 'still-dre.mp3', 'still-dre.jpg'),
-    (80, 8,4, 'MC''s Act Like They Don''t Know', 'mc-act.mp3', 'mc-act.jpg'),
+    (80, 8,4, 'KRS ONE', 'mc-act.mp3', 'mc-act.jpg'),
     (110, 10,5, 'When The Music Stops', 'when-the-music-stops.mp3', 'when-the-music-stops.jpg'),
     (120, 11,4, 'Livin'' Proof', 'livin-proof.mp3', 'livin-proof.jpg');
 
@@ -52,12 +52,12 @@ insert into reviews(score, beat_id, user_id, comment) values
     (9, 6, 1, 'Eminem behind the knobs, that''s the shit!');
 
 insert into orders(id, order_date, beat_id, user_id) values
-    (nextval('order_number_seq'),'2007-12-03 10:15:30', 4,1),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 1),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 2),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 3),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',1, 4),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',2, 4),
-    (nextval('order_number_seq'),'2007-12-03 10:15:30',3, 5);
+    (1,'2007-12-03 10:15:30', 4,1),
+    (2,'2007-12-03 10:15:30',3, 1),
+    (3,'2007-12-03 10:15:30',2, 2),
+    (4,'2007-12-03 10:15:30',2, 3),
+    (5,'2007-12-03 10:15:30',1, 4),
+    (6,'2007-12-03 10:15:30',2, 4),
+    (7,'2007-12-03 10:15:30',3, 5);
 
 

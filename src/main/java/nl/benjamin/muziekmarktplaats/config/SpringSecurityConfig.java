@@ -94,7 +94,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE,"/beats/{id}").denyAll()
 
 
-                /*TODO voeg de antmatchers toe voor admin(post en delete) en user (overige)*/
+                /*TODO voeg de antmatchers toe voor admin(post en delete) en username (overige)*/
                 .requestMatchers("/authenticated").authenticated()
                 .requestMatchers("/authenticate").permitAll()/*alleen dit punt mag toegankelijk zijn voor niet ingelogde gebruikers*/
                 .anyRequest().denyAll() /*Deze voeg je altijd als laatste toe, om een default beveiliging te hebben voor eventuele vergeten endpoints of endpoints die je later toevoegd. */

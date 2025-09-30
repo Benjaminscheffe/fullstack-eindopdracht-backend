@@ -3,10 +3,8 @@ package nl.benjamin.muziekmarktplaats.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import nl.benjamin.muziekmarktplaats.dto.BeatRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.BeatResponseDto;
-import nl.benjamin.muziekmarktplaats.dto.BeatResponseUserDto;
+import nl.benjamin.muziekmarktplaats.dto.BeatResponseDtoCompact;
 import nl.benjamin.muziekmarktplaats.mapper.BeatMapper;
-import nl.benjamin.muziekmarktplaats.model.Beat;
-import nl.benjamin.muziekmarktplaats.repository.BeatRepository;
 import nl.benjamin.muziekmarktplaats.service.BeatFileService;
 import nl.benjamin.muziekmarktplaats.service.BeatService;
 import nl.benjamin.muziekmarktplaats.service.ImageService;
@@ -22,8 +20,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 @CrossOrigin
 @RestController
@@ -54,8 +50,8 @@ public class BeatController {
     }
 
     @PostMapping("/{id}/image")
-    public ResponseEntity<BeatResponseUserDto> addImageToBeat(@PathVariable("id") Long beatId,
-                                                     @RequestBody MultipartFile file)
+    public ResponseEntity<BeatResponseDtoCompact> addImageToBeat(@PathVariable("id") Long beatId,
+                                                                 @RequestBody MultipartFile file)
             throws IOException {
         System.out.println(file);
         String url = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -64,7 +60,7 @@ public class BeatController {
                 .path("/image")
                 .toUriString();
         String fileName = imageService.storeFile(file);
-        BeatResponseUserDto beat = mapper.toResponseUserDto(service.assignImageToBeat(fileName, beatId));
+        BeatResponseDtoCompact beat = mapper.toResponseUserDto(service.assignImageToBeat(fileName, beatId));
 
         return ResponseEntity.created(URI.create(url)).body(beat);
 

@@ -2,7 +2,7 @@ package nl.benjamin.muziekmarktplaats.mapper;
 
 import nl.benjamin.muziekmarktplaats.dto.BeatRequestDto;
 import nl.benjamin.muziekmarktplaats.dto.BeatResponseDto;
-import nl.benjamin.muziekmarktplaats.dto.BeatResponseUserDto;
+import nl.benjamin.muziekmarktplaats.dto.BeatResponseDtoCompact;
 import nl.benjamin.muziekmarktplaats.model.Beat;
 import nl.benjamin.muziekmarktplaats.model.User;
 import org.springframework.stereotype.Component;
@@ -51,8 +51,8 @@ public class BeatMapper {
         return beatDto;
     }
 
-    public BeatResponseUserDto toResponseUserDto(Beat beat) {
-        BeatResponseUserDto beatDto = new BeatResponseUserDto();
+    public BeatResponseDtoCompact toResponseUserDto(Beat beat) {
+        BeatResponseDtoCompact beatDto = new BeatResponseDtoCompact();
         beatDto.id = beat.getId();
         beatDto.title = beat.getTitle();
         beatDto.bpm = beat.getBpm();
@@ -77,11 +77,11 @@ public class BeatMapper {
        return responseDtoList;
     }
 
-    public List<BeatResponseUserDto> toListResponseUserDto(List<Beat> beatList) {
-        List<BeatResponseUserDto> responseDtoUserList = new ArrayList<>();
+    public List<BeatResponseDtoCompact> toListResponseUserDto(List<Beat> beatList) {
+        List<BeatResponseDtoCompact> responseDtoUserList = new ArrayList<>();
 
         for (Beat beat : beatList) {
-            BeatResponseUserDto responseDto = this.toResponseUserDto(beat);
+            BeatResponseDtoCompact responseDto = this.toResponseUserDto(beat);
 
             responseDtoUserList.add(responseDto);
         }

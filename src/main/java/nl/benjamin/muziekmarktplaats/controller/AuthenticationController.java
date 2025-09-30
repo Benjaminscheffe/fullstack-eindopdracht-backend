@@ -30,7 +30,7 @@ public class AuthenticationController {
     }
 
     /*
-             Deze methode geeft de principal (basis user gegevens) terug van de ingelogde gebruiker
+             Deze methode geeft de principal (basis username gegevens) terug van de ingelogde gebruiker
          */
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {

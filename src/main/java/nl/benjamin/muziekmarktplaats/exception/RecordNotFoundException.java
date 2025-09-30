@@ -18,13 +18,13 @@ public class RecordNotFoundException extends RuntimeException {
 
 //void updateUser() {
 //    // arrange
-//    User user= new User("Klaas", "klaas@hotmail.com", "1234");
-//    user.setId(1L);
+//    User username= new User("Klaas", "klaas@hotmail.com", "1234");
+//    username.setId(1L);
 //
 //    UserRequestDto newUser = new UserRequestDto("henk@hotmail.com", "5678");
 //
-//    when(userRepos.findById(1L)).thenReturn(Optional.of(user));
-//    when(userRepos.save(any(User.class))).thenReturn(user);
+//    when(userRepos.findById(1L)).thenReturn(Optional.of(username));
+//    when(userRepos.save(any(User.class))).thenReturn(username);
 //
 //    UserResponseDto expectedDto = new UserResponseDto();
 //

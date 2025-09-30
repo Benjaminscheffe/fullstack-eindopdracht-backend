@@ -2,7 +2,7 @@ package nl.benjamin.muziekmarktplaats.dto;
 
 import nl.benjamin.muziekmarktplaats.model.Image;
 
-public class BeatResponseUserDto {
+public class BeatResponseDtoCompact {
     public Long id;
     public String title;
     public int bpm;
