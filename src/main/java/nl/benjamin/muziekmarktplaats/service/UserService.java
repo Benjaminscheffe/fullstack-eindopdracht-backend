@@ -60,7 +60,7 @@ public class UserService {
         if (user.isPresent()) {
             return mapper.toResponseDto(user.get());
         } else {
-            throw new RecordNotFoundException("No user with id " + id);
+            throw new RecordNotFoundException("No username with id " + id);
         }
     }
 
@@ -71,7 +71,7 @@ public class UserService {
         if (user.isPresent()) {
             return mapper.toResponseDto(user.get());
         } else {
-            throw new RecordNotFoundException("No user with name " + username);
+            throw new RecordNotFoundException("No username with name " + username);
         }
     }
 
@@ -88,7 +88,7 @@ public class UserService {
 
             return mapper.toResponseDto(returnUser);
         } else {
-            throw new RecordNotFoundException("No user with id " + id);
+            throw new RecordNotFoundException("No username with id " + id);
         }
     }
 }

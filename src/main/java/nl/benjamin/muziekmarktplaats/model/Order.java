@@ -9,7 +9,15 @@ import java.time.LocalDateTime;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(    strategy = GenerationType.SEQUENCE,
+            generator = "my_seq"
+    )
+    @SequenceGenerator(
+            name = "my_seq",
+            sequenceName = "my_sequence",
+            initialValue = 8,
+            allocationSize = 1
+    )
     private Long id;
 
     @Column(name = "order_date")

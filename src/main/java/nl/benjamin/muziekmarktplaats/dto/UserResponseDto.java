@@ -1,7 +1,5 @@
 package nl.benjamin.muziekmarktplaats.dto;
 
-import nl.benjamin.muziekmarktplaats.model.Beat;
-import nl.benjamin.muziekmarktplaats.model.Order;
 import nl.benjamin.muziekmarktplaats.model.Role;
 
 import java.util.List;
@@ -13,6 +11,6 @@ public class UserResponseDto {
     public String email;
     public String password;
     public List<OrderResponseDto> orderList;
-    public List<BeatResponseUserDto> beats;
+    public List<BeatResponseDtoCompact> beats;
     public Set<Role> roles;
 }
